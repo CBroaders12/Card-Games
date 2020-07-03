@@ -31,6 +31,17 @@ def war(player1, player2, deck):
         player1.draw(deck)
         player2.draw(deck)
     
+    print("Let the game begin!")
+    
+    while player1.hand and player2.hand:
+        cards_played = []
+        player1_card = player1.play_card()
+        player2_card = player2.play_card()
+        cards_played += [player1_card, player2_card]
+
+        print("%s plays the %s" % (player1.name, player1_card))
+        print("%s plays the %s" % (player2.name, player2_card))
+    
 
 # Function for if there is a tie takes in 2 players as input
 def tie_breaker(player1, player2):
