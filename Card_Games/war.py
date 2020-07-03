@@ -16,6 +16,7 @@ Card values notes:
 - Aces are high
 - Deuces beat aces
 """
+card_values = {'Ace': 14, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, '10': 10, 'Jack': 11, 'Queen': 12, 'King': 13}
 
 # Function to play the game takes in the players (just 2 atm) and a deck of cards as input
 def war(player1, player2, deck):
@@ -33,7 +34,13 @@ def war(player1, player2, deck):
     
     print("Let the game begin!")
     
+    round = 0
+
     while player1.hand and player2.hand:
+        round += 1
+        print("**********")
+        print("Round {}!".format(round))
+        print("-----------")
         cards_played = []
         player1_card = player1.play_card()
         player2_card = player2.play_card()
@@ -41,11 +48,42 @@ def war(player1, player2, deck):
 
         print("%s plays the %s" % (player1.name, player1_card))
         print("%s plays the %s" % (player2.name, player2_card))
+
+        if card_values[player1_card.value] > card_values[player2_card.value]:
+            print("-----------------")
+            print("%s takes the hand" % (player1.name))
+            print("-----------------")
+            player1.hand += cards_played
+        
+        elif card_values[player1_card.value] < card_values[player2_card.value]:
+            print("-----------------")
+            print("%s takes the hand" % (player2.name))
+            print("-----------------")
+            player2.hand += cards_played
+        
+        else:
+            tie_breaker(player1, player2)
+        
+        print("{} has {} cards".format(player1.name, len(player1.hand)))
+        print("{} has {} cards".format(player2.name, len(player2.hand)))
+        print("*******************\n")
     
 
 # Function for if there is a tie takes in 2 players as input
 def tie_breaker(player1, player2):
-    pass
+    print("Tie breaker time!")
+    print("----------------")
+    
+    cards_played = []
+
+    for x in range(3):
+        cards_played.append(player1.play_card())
+        cards_played.append(player2.play_card())
+    
+    player1_card = player1.play_card()
+    player2_card = player2.play_card()
+    cards_played += [player1_card, player2_card]
+
 
 #Initialize the deck and the players
 deck = Deck()
