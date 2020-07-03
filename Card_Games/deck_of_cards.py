@@ -1,7 +1,7 @@
 import random
 
 class Card:
-    def __init__(self, value, suit=None):
+    def __init__(self, value, suit):
         self.value = value
         self.suit = suit
     
@@ -50,9 +50,12 @@ class Player:
         for card in self.hand:
             card.show()
 
-
-
 deck = Deck()
 deck.shuffle()
-card = deck.draw()
-card.show()
+
+conor = Player('Conor')
+
+for i in range(42):
+    conor.draw(deck)
+
+print(deck.cards)
