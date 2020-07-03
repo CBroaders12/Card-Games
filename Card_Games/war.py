@@ -19,7 +19,18 @@ Card values notes:
 
 # Function to play the game takes in the players (just 2 atm) and a deck of cards as input
 def war(player1, player2, deck):
-    pass
+    print("Let's play a game of war!")
+    print("-------------------------")
+    print("Looks like it's %s vs. %s" % (player1.name, player2.name))
+
+    print("Shuffling deck...")
+    deck.shuffle()
+    
+    print("Dealing cards...")
+    while deck.cards: # Deal cards until the deck is empty
+        player1.draw(deck)
+        player2.draw(deck)
+    
 
 # Function for if there is a tie takes in 2 players as input
 def tie_breaker(player1, player2):
@@ -30,3 +41,5 @@ deck = Deck()
 
 player1 = Player("Joe")
 player2 = Player("Bill")
+
+war(player1, player2, deck)
