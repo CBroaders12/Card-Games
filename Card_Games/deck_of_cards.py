@@ -21,7 +21,7 @@ class Deck:
     
     def build(self):
         for suit in self.suits:
-            for value in self.values.values():
+            for value in self.values.keys():
                 self.cards.append(Card(value, suit))
     
     def show(self):
@@ -32,17 +32,27 @@ class Deck:
         for idx in range(len(self.cards) - 1 , 0, -1):
             rand_idx = random.randint(0, idx)
             self.cards[idx], self.cards[rand_idx] = self.cards[rand_idx], self.cards[idx]
+    
+    def draw_card(self):
+        return self.cards.pop(0)
 
 class Player:
 
-    def __init__(self):
-        pass
+    def __init__(self, name):
+        self.name = name
+        self.hand = []
+    
+    def draw(self, deck):
+        self.hand.append(deck.draw_card())
+        return self
+    
+    def show_hand(self):
+        for card in self.hand:
+            card.show()
 
 
-
-# values = {1: "Ace", 2: "Two", 3: "Three", 4: "Four", 5: "Five", 6: "Six", 7: "Seven", 8: "Eight", 9: "Nine", 10: "Ten", 11: "Jack", 12: "Queen", 13: "King"}
-# rev_values = {v: k for k, v in values.items()}
 
 deck = Deck()
 deck.shuffle()
-deck.show()
+card = deck.draw()
+card.show()
