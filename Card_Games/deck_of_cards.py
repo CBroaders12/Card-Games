@@ -49,13 +49,24 @@ class Player:
     def show_hand(self):
         for card in self.hand:
             card.show()
+    
+    def play_card(self, card=None):
+        if card:
+            if card in self.hand:
+                card_idx = self.hand.index(card)
+                return self.hand.pop(card_idx)
+        return self.hand.pop(0)
 
-deck = Deck()
-deck.shuffle()
 
-conor = Player('Conor')
+# deck = Deck()
+# deck.shuffle()
 
-for i in range(42):
-    conor.draw(deck)
+# conor = Player('Conor')
 
-print(deck.cards)
+# for i in range(5):
+#     conor.draw(deck)
+
+# conor.show_hand()
+
+# card_to_play = input("What card do you want to play? ")
+# print(conor.play_card(card_to_play))
